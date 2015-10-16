@@ -1,6 +1,7 @@
 from math import radians
 
 from numpy import ndarray
+import numpy as np
 
 from matrix import Matrix
 from mesh import Mesh
@@ -16,17 +17,27 @@ class Canvas(object):
         self.width = width
         self.height = height
         self.pixels = pixels
+        self.buffer_size = width * height
+        self.depth_buffer = np.empty(self.width * self.height)
 
     def clear(self):
         self.pixels.fill(0)
+        self.depth_buffer.fill(float("inf"))
 
-    def put_pixel(self, x: int, y: int, color: Color):
+    def put_pixel(self, x: int, y: int, z: float, color: Color):
         index = int(y) * self.width + int(x)
+
+        depth = self.depth_buffer[index]
+
+        if depth < z:
+            return
+
+        self.depth_buffer[index] = z
         self.pixels[index] = color.uint32()
 
     def draw_point(self, point: Vector, color: Color = Color.white()):
         if 0 <= point.x < self.width and 0 <= point.y < self.height:
-            self.put_pixel(point.x, point.y, color)
+            self.put_pixel(point.x, point.y, point.z, color)
 
     def draw_line(self, p1: Vector, p2: Vector):
         x1, y1, x2, y2 = [int(i) for i in [p1.x, p1.y, p2.x, p2.y]]
