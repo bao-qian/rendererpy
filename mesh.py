@@ -7,7 +7,7 @@ from vertex import Vertex
 class Mesh:
     def __init__(self, model_path: str, texture_path: str):
         self.position = Vector(0, 0, 0)
-        self.rotation = Vector(0, 0, 0)
+        self.rotation = Vector(0, 1, 0)
         self.scale = Vector(1, 1, 1)
 
         self.texture = Texture(texture_path)

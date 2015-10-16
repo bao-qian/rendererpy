@@ -18,10 +18,6 @@ class Test(TestCase):
         self.assertEqual(len(texture.pixels), 256 * 256)
         self.assertEqual(texture.pixels[256], 387453183)
 
-        # def test_color(self):
-        #     c = 1683838207
-        #     self.assertEqual(Color(c).uint32(), c)
-
     def test_mesh(self):
         mesh = Mesh("illidan.model", "illidan.texture")
         self.assertEqual(len(mesh.vertices), 4042)

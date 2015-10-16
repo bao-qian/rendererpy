@@ -18,7 +18,7 @@ class Canvas(object):
         self.height = height
         self.pixels = pixels
         self.buffer_size = width * height
-        self.depth_buffer = np.empty(self.width * self.height)
+        self.depth_buffer = np.full(self.width * self.height, float("inf"))
 
     def clear(self):
         self.pixels.fill(0)
@@ -66,7 +66,7 @@ class Canvas(object):
         for x in range(x1, x2 + sign * 1, sign):
             if x1 != x2:
                 factor = (x - x1) / (x2 - x1)
-            # color = interpolate(v1.color, v2.color, factor)
+            # color = interpolate(va.color, vb.color, factor)
             v = interpolate(va, vb, factor)
             color = texture.sample(v.u, v.v)
             self.draw_point(Vector(x, y), color)

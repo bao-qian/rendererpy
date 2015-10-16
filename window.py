@@ -3,7 +3,10 @@ import sys
 from numpy import ndarray
 
 from canvas import Canvas
+from color import Color
 from mesh import Mesh
+from vector import Vector
+from vertex import Vertex
 
 
 class Window(object):
@@ -20,9 +23,9 @@ class Window(object):
             key_esc: self.exit
         }
 
-        # self.v1 = Vertex(Vector(0, 0), Color.cyan())
-        # self.v2 = Vertex(Vector(300, 100), Color.red())
-        # self.v3 = Vertex(Vector(200, 300), Color.green())
+        # self.v1 = Vertex(Vector(0, 0),Vector(0, 0),1,1, Color.cyan())
+        # self.v2 = Vertex(Vector(300, 100),Vector(0, 0),1,1,  Color.red())
+        # self.v3 = Vertex(Vector(200, 300),Vector(0, 0),1,1,  Color.green())
 
         model_path = "illidan.model"
         texture_path = "illidan.texture"
@@ -31,13 +34,12 @@ class Window(object):
 
     def clear(self):
         self.canvas.clear()
-        pass
 
     def update(self, dt):
         pass
 
     def draw(self):
-        # self.canvas.draw_triangle(self.v1, self.v2, self.v3)
+        # self.canvas.draw_triangle(self.v1, self.v2, self.v3, self.mesh.texture)
         self.canvas.draw_mesh(self.mesh)
 
     def mouse_event(self, button, state, x, y):
