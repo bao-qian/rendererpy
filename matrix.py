@@ -60,9 +60,9 @@ class Matrix:
         zeye = -zaxis.dot(eye)
 
         values = [
-            xaxis.x, yaxis.x, zaxis.x, 0,
-            xaxis.y, yaxis.y, zaxis.y, 0,
-            xaxis.z, yaxis.z, zaxis.z, 0,
+            xaxis.x(), yaxis.x(), zaxis.x(), 0,
+            xaxis.y(), yaxis.y(), zaxis.y(), 0,
+            xaxis.z(), yaxis.z(), zaxis.z(), 0,
             xeye,    yeye,    zeye,    1,
         ]
 
@@ -118,9 +118,9 @@ class Matrix:
 
     @staticmethod
     def rotation(r: Vector):
-        x = Matrix.rotationX(r.x)
-        y = Matrix.rotationY(r.y)
-        z = Matrix.rotationZ(r.z)
+        x = Matrix.rotationX(r.x())
+        y = Matrix.rotationY(r.y())
+        z = Matrix.rotationZ(r.z())
         return z * x * y
 
     @staticmethod
@@ -129,25 +129,25 @@ class Matrix:
             1,   0,   0,   0,
             0,   1,   0,   0,
             0,   0,   1,   0,
-            t.x, t.y, t.z, 1,
+            t.x(), t.y(), t.z(), 1,
         ]
         return Matrix(values)
 
     @staticmethod
     def scale(s: Vector):
         values = [
-            s.x, 0,   0,   0,
-            0,   s.y, 0,   0,
-            0,   0,   s.z, 0,
-            0,   0,   0,   1,
+            s.x(), 0,     0,     0,
+            0,     s.y(), 0,     0,
+            0,     0,     s.z(), 0,
+            0,     0,     0,     1,
         ]
         return Matrix(values)
 
     def transform(self, v: Vector):
-        x = v.x * self.p[0 * 4 + 0] + v.y * self.p[1 * 4 + 0] + v.z * self.p[2 * 4 + 0] + self.p[3 * 4 + 0]
-        y = v.x * self.p[0 * 4 + 1] + v.y * self.p[1 * 4 + 1] + v.z * self.p[2 * 4 + 1] + self.p[3 * 4 + 1]
-        z = v.x * self.p[0 * 4 + 2] + v.y * self.p[1 * 4 + 2] + v.z * self.p[2 * 4 + 2] + self.p[3 * 4 + 2]
-        w = v.x * self.p[0 * 4 + 3] + v.y * self.p[1 * 4 + 3] + v.z * self.p[2 * 4 + 3] + self.p[3 * 4 + 3]
+        x = v.x() * self.p[0 * 4 + 0] + v.y() * self.p[1 * 4 + 0] + v.z() * self.p[2 * 4 + 0] + self.p[3 * 4 + 0]
+        y = v.x() * self.p[0 * 4 + 1] + v.y() * self.p[1 * 4 + 1] + v.z() * self.p[2 * 4 + 1] + self.p[3 * 4 + 1]
+        z = v.x() * self.p[0 * 4 + 2] + v.y() * self.p[1 * 4 + 2] + v.z() * self.p[2 * 4 + 2] + self.p[3 * 4 + 2]
+        w = v.x() * self.p[0 * 4 + 3] + v.y() * self.p[1 * 4 + 3] + v.z() * self.p[2 * 4 + 3] + self.p[3 * 4 + 3]
         return Vector(x / w, y / w, z / w)
 
 
